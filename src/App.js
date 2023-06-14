@@ -59,6 +59,7 @@ export default function Game() {
   const [currentMove, setCurrentMove] = useState(0);
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
+  const [sortAsc, setSortAsc] = useState(true);
 
   function handlePlay(nextSquares) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
@@ -94,13 +95,40 @@ export default function Game() {
     }
   });
 
+  const RadioButton = () => {
+    if (sortAsc) {
+      return (
+        <React.Fragment>
+          <input type="radio" id="sortChoice1" name="sort" value="asc" onChange={() => { setSortAsc(true); }} checked />
+          <label for="contactChoice1">昇順</label>
+
+          <input type="radio" id="sortChoice2" name="sort" value="desc" onChange={() => { setSortAsc(false); }} />
+          <label for="contactChoice2">降順</label>
+        </React.Fragment>
+      )
+    } else {
+      return (
+        <React.Fragment>
+          <input type="radio" id="sortChoice1" name="sort" value="asc" onChange={() => { setSortAsc(true); }} />
+          <label for="contactChoice1">昇順</label>
+
+          <input type="radio" id="sortChoice2" name="sort" value="desc" onChange={() => { setSortAsc(false); }} checked />
+          <label for="contactChoice2">降順</label>
+        </React.Fragment>
+      )
+    }
+  }
+
   return (
     <div className="game">
       <div className="game-board">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className="game-info">
-        <ol>{moves}</ol>
+        <ol>
+          <RadioButton />
+        </ol>
+        {sortAsc ? <ol>{moves}</ol> : <ol reversed>{moves.reverse()}</ol>}
       </div>
     </div>
   );
