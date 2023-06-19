@@ -96,27 +96,29 @@ export default function Game() {
   });
 
   const RadioButton = () => {
-    if (sortAsc) {
-      return (
-        <React.Fragment>
-          <input type="radio" id="sortChoice1" name="sort" value="asc" onChange={() => { setSortAsc(true); }} checked />
-          <label for="contactChoice1">昇順</label>
+    return (
+      <React.Fragment>
+        <input
+          type="radio"
+          id="sortChoice1"
+          name="sort"
+          value="asc"
+          onChange={() => { setSortAsc(true); }}
+          checked={sortAsc}
+        />
+        <label for="sortChoice1">昇順</label>
 
-          <input type="radio" id="sortChoice2" name="sort" value="desc" onChange={() => { setSortAsc(false); }} />
-          <label for="contactChoice2">降順</label>
-        </React.Fragment>
-      )
-    } else {
-      return (
-        <React.Fragment>
-          <input type="radio" id="sortChoice1" name="sort" value="asc" onChange={() => { setSortAsc(true); }} />
-          <label for="contactChoice1">昇順</label>
-
-          <input type="radio" id="sortChoice2" name="sort" value="desc" onChange={() => { setSortAsc(false); }} checked />
-          <label for="contactChoice2">降順</label>
-        </React.Fragment>
-      )
-    }
+        <input
+          type="radio"
+          id="sortChoice2"
+          name="sort"
+          value="desc"
+          onChange={() => { setSortAsc(false); }}
+          checked={!sortAsc}
+        />
+        <label for="sortChoice2">降順</label>
+      </React.Fragment>
+    )
   }
 
   return (
